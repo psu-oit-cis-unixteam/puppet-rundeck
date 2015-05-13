@@ -29,6 +29,7 @@ class rundeck::config(
   $service_name          = $rundeck::service_name,
   $mail_config           = $rundeck::mail_config,
   $security_config       = $rundeck::security_config,
+  $security_role         = $rundeck::security_role,
   $acl_policies          = $rundeck::acl_policies,
   $api_policies          = $rundeck::api_policies
 ) inherits rundeck::params {
@@ -115,6 +116,11 @@ class rundeck::config(
     owner  => root,
     group  => root,
     mode   => '0755'
+  }
+
+  class { 'rundeck::config::global::web':
+    security_role => $security_role,
+    notify        => Service[$service_name],
   }
 
   class { 'rundeck::config::global::framework': } ->
