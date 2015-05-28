@@ -22,7 +22,7 @@ class rundeck::params {
       $package_name = 'rundeck'
       $package_ensure = 'installed'
       $service_name = 'rundeckd'
-      $jre_name = 'java-1.6.0-openjdk'
+      $jre_name = 'java-1.7.0-openjdk'
       $jre_ensure = 'installed'
       $manage_yum_repo = true
     }
@@ -65,8 +65,8 @@ class rundeck::params {
   $auth_users = {}
   $auth_template = 'rundeck/jaas-auth.conf.erb'
 
-  $acl_template = 'rundeck/admin.aclpolicy.erb'
-  $api_template = 'rundeck/apitoken.aclpolicy.erb'
+  $acl_template = 'rundeck/aclpolicy.erb'
+  $api_template = 'rundeck/aclpolicy.erb'
 
   $acl_policies = [
     {
@@ -95,6 +95,7 @@ class rundeck::params {
       'resource_types' => [
         { 'type'  => 'resource', 'rules' => [{'name' => 'allow','rule' => '*'}] },
         { 'type'  => 'project', 'rules' => [{'name' => 'allow','rule' => '*'}] },
+        { 'type'  => 'storage', 'rules' => [{'name' => 'allow','rule' => '*'}] },
       ],
       'by' => {
         'groups'    => ['admin'],
